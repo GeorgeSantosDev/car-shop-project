@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
+import CarService from '../../../src/Services/car.service';
 import { carInput, carOutput } from '../../mocks/car.mocks';
 
 const service = new CarService();

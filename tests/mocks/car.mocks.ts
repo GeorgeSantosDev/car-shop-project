@@ -1,3 +1,6 @@
+import { ICar } from '../../src/Interfaces';
+import Car from '../../src/Domains/Car';
+
 export const carInput: ICar = {
   model: 'Marea',
   year: 2002,
