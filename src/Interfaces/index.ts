@@ -1,5 +1,4 @@
 import ICar from './ICar';
+import IVehicle from './IVehicle';
 
-const d = '';
-
-export { ICar, d };
+export { ICar, IVehicle };

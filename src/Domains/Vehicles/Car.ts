@@ -1,63 +1,83 @@
 import { ICar } from '../../Interfaces';
 
 export default class Car {
-  private _carDefinitions: ICar;
+  private model: string;
+  private year: number;
+  private color: string;
+  private status: boolean;
+  private buyValue: number;
+  private doorsQty: number;
+  private seatsQty: number;
+  private id: string | undefined;
 
-  constructor(carDefinitions: ICar) { this._carDefinitions = carDefinitions; }
+  constructor(car: ICar) { 
+    this.model = car.model;
+    this.year = car.year;
+    this.color = car.color;
+    this.status = car.status;
+    this.buyValue = car.buyValue;
+    this.doorsQty = car.doorsQty;
+    this.seatsQty = car.seatsQty;
+    this.id = car.id;
+  }
 
   public getModel() { 
-    return this._carDefinitions.model;
+    return this.model;
   }
 
   public setModel(model: string) { 
-    this._carDefinitions.model = model;
+    this.model = model;
   }
 
   public getYear() { 
-    return this._carDefinitions.year;
+    return this.year;
   }
 
   public setYear(year: number) { 
-    this._carDefinitions.year = year;
+    this.year = year;
   }
 
   public getColor() { 
-    return this._carDefinitions.color;
+    return this.color;
   }
 
   public setColor(color: string) { 
-    this._carDefinitions.color = color;
+    this.color = color;
   }
 
   public getStatus() { 
-    return this._carDefinitions.status;
+    return this.status;
   }
 
   public setStatus(status: boolean) { 
-    this._carDefinitions.status = status;
+    this.status = status;
   }
 
   public getBuyValue() { 
-    return this._carDefinitions.buyValue;
+    return this.buyValue;
   }
 
   public setBuyValue(buyValue: number) { 
-    this._carDefinitions.buyValue = buyValue;
+    this.buyValue = buyValue;
   }
 
   public getDoorsQty() { 
-    return this._carDefinitions.doorsQty;
+    return this.doorsQty;
   }
 
   public setDoorsQty(doorsQty: number) { 
-    this._carDefinitions.doorsQty = doorsQty;
+    this.doorsQty = doorsQty;
   }
 
   public getSeatsQty() { 
-    return this._carDefinitions.seatsQty;
+    return this.seatsQty;
   }
 
   public setSeatsQty(seatsQty: number) { 
-    this._carDefinitions.seatsQty = seatsQty;
+    this.seatsQty = seatsQty;
+  }
+
+  public getId() { 
+    return this.id;
   }
 }
