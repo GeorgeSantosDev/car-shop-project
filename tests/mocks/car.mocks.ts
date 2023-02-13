@@ -21,3 +21,5 @@ export const carOutput: Car = new Car({
   doorsQty: 4,
   seatsQty: 5,
 });
+
+export const carsOutput: Car[] = [carOutput, carOutput];
