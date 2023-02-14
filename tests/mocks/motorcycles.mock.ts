@@ -1,4 +1,7 @@
-export const motorcycleInput: IMotorcycles = {
+import { IMotorcycle } from '../../src/Interfaces';
+import Motorcycle from '../../src/Domains/Motorcycle';
+
+export const motorcycleInput: IMotorcycle = {
   model: 'Honda Cb 600f Hornet',
   year: 2005,
   color: 'Yellow',
@@ -8,7 +11,7 @@ export const motorcycleInput: IMotorcycles = {
   engineCapacity: 600,
 };
 
-export const motorcycleOutput: Motorcycles = new Motorcycles({
+export const motorcycleOutput: Motorcycle = new Motorcycle({
   id: '6348513f34c397abcad040b2',
   model: 'Honda Cb 600f Hornet',
   year: 2005,

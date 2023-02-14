@@ -1,10 +1,10 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
-import MotorcyclesService from '../../../src/Services/car.service';
+import MotorcycleService from '../../../src/Services/motorcycle.service';
 import { motorcycleInput, motorcycleOutput } from '../../mocks/motorcycles.mock';
 
-const service = new MotorcyclesService();
+const service = new MotorcycleService();
 
 describe('Test motorcycles path', function () {
   afterEach(function () {
