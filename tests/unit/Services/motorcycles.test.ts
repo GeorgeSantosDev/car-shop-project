@@ -57,4 +57,34 @@ describe('Test motorcycles path', function () {
       }
     });
   });
+
+  describe('Test if is possible to update a motorcycle', function () {
+    it('should possible to update a motorcycle', async function () {
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(motorcycleOutput);
+      const result = await service.update('6348513f34c397abcad040b2', motorcycleInput);
+
+      expect(result).to.be.deep.equal(motorcycleOutput);
+    });
+
+    it(
+      'should throw an error message Motorcycle not found when id does not exit in db',
+      async function () {
+        sinon.stub(Model, 'findByIdAndUpdate').resolves(null);
+        try {
+          await service.update('6348513f34c397abcad040b2', motorcycleInput);
+        } catch (error) {
+          expect((error as HttpException).message).to.be.equal('Motorcycle not found');
+        }
+      },
+    );
+
+    it('should throw an error message Invalid mongo id for invalid id format', async function () {
+      sinon.stub(Model, 'findById').resolves();
+      try {
+        await service.update('5', motorcycleInput);
+      } catch (error) {
+        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+      }
+    });
+  });
 });
