@@ -48,4 +48,27 @@ export default class MotorcycleController {
       next(error);
     }
   }
+
+  public async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+  
+      const {
+        model,
+        year,
+        color,
+        status,
+        buyValue,
+        category,
+        engineCapacity,
+      } = req.body as IMotorcycle;
+      
+      const updateMotorcycle = { model, year, color, status, buyValue, category, engineCapacity };
+      const response = await this._service.update(id, updateMotorcycle);
+
+      return res.status(StatusCode.SUCESS).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
