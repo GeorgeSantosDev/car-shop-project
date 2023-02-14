@@ -36,4 +36,13 @@ export default class MotorcycleService {
     if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Motorcycle not found');
     return new Motorcycle(response);
   }
+
+  public async update(id: string, obj: IMotorcycle) {
+    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+
+    const response = await this._model.update(id, obj);
+
+    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Motorcycle not found');
+    return new Motorcycle(response);
+  }
 }
