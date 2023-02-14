@@ -36,4 +36,13 @@ export default class CarService {
     if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
     return new Car(response);
   }
+
+  public async update(id: string, obj: ICar) {
+    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+
+    const response = await this._model.update(id, obj);
+
+    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
+    return new Car(response);
+  }
 }
