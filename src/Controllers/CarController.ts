@@ -24,7 +24,7 @@ export default class CarController {
       doorsQty,
       seatsQty,
     } = req.body as ICar;
-    
+
     const newCar = { model, year, color, status, buyValue, doorsQty, seatsQty };
 
     const response = await this._service.register(newCar);
@@ -42,7 +42,30 @@ export default class CarController {
       const { id } = req.params;
 
       const response = await this._service.findById(id);
+
+      return res.status(StatusCode.SUCESS).json(response);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  public async update(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
   
+      const {
+        model,
+        year,
+        color,
+        status,
+        buyValue,
+        doorsQty,
+        seatsQty,
+      } = req.body as ICar;
+
+      const updateCar = { model, year, color, status, buyValue, doorsQty, seatsQty };
+      const response = await this._service.update(id, updateCar);
+
       return res.status(StatusCode.SUCESS).json(response);
     } catch (error) {
       next(error);
