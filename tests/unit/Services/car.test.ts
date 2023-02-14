@@ -87,4 +87,34 @@ describe('Test car path', function () {
       }
     });
   });
+
+  describe('Test if is possible to delete a car', function () {
+    it('should possible to delete car', async function () {
+      sinon.stub(Model, 'findByIdAndDelete').resolves(carOutput);
+      const result = await service.delete('6348513f34c397abcad040b2');
+
+      expect(result).to.be.deep.equal(carOutput);
+    });
+
+    it(
+      'should throw an error message Car not found when id does not exit in db',
+      async function () {
+        sinon.stub(Model, 'findByIdAndDelete').resolves(null);
+        try {
+          await service.delete('6348513f34c397abcad040b2');
+        } catch (error) {
+          expect((error as HttpException).message).to.be.equal('Car not found');
+        }
+      },
+    );
+
+    it('should throw an error message Invalid mongo id for invalid id format', async function () {
+      sinon.stub(Model, 'findById').resolves();
+      try {
+        await service.delete('5');
+      } catch (error) {
+        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+      }
+    });
+  });
 });

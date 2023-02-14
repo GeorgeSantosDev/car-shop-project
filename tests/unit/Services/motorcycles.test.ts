@@ -87,4 +87,34 @@ describe('Test motorcycles path', function () {
       }
     });
   });
+
+  describe('Test if is possible to delete a motorcycle', function () {
+    it('should possible to delete motorcycle', async function () {
+      sinon.stub(Model, 'findByIdAndDelete').resolves(motorcycleOutput);
+      const result = await service.delete('6348513f34c397abcad040b2');
+
+      expect(result).to.be.deep.equal(motorcycleOutput);
+    });
+
+    it(
+      'should throw an error message Motorcycle not found when id does not exit in db',
+      async function () {
+        sinon.stub(Model, 'findByIdAndDelete').resolves(null);
+        try {
+          await service.delete('6348513f34c397abcad040b2');
+        } catch (error) {
+          expect((error as HttpException).message).to.be.equal('Motorcycle not found');
+        }
+      },
+    );
+
+    it('should throw an error message Invalid mongo id for invalid id format', async function () {
+      sinon.stub(Model, 'findByIdAndDelete').resolves();
+      try {
+        await service.delete('5');
+      } catch (error) {
+        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+      }
+    });
+  });
 });
