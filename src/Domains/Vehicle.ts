@@ -1,24 +1,20 @@
-import { IMotorcycle } from '../Interfaces';
+import { IVehicle } from '../Interfaces';
 
-export default class Motorcycle {
+export default class Vehicle {
   protected id: string | undefined;
   protected model: string;
   protected year: number;
   protected color: string;
   protected status: boolean;
   protected buyValue: number;
-  private category: string;
-  private engineCapacity: number;
 
-  constructor(car: IMotorcycle) { 
-    this.id = car.id;
-    this.model = car.model;
-    this.year = car.year;
-    this.color = car.color;
-    this.status = car.status || false;
-    this.buyValue = car.buyValue;
-    this.category = car.category;
-    this.engineCapacity = car.engineCapacity;
+  constructor(vehicle: IVehicle) { 
+    this.id = vehicle.id;
+    this.model = vehicle.model;
+    this.year = vehicle.year;
+    this.color = vehicle.color;
+    this.status = vehicle.status || false;
+    this.buyValue = vehicle.buyValue;
   }
 
   public getModel() { 
@@ -60,23 +56,6 @@ export default class Motorcycle {
   public setBuyValue(buyValue: number) { 
     this.buyValue = buyValue;
   }
-
-  public getCategory() { 
-    return this.category;
-  }
-
-  public setCategory(category: string) { 
-    this.category = category;
-  }
-
-  public getEngineCapacity() { 
-    return this.engineCapacity;
-  }
-
-  public setEngineCapacity(engineCapacity: number) { 
-    this.engineCapacity = engineCapacity;
-  }
-
   public getId() { 
     return this.id;
   }
