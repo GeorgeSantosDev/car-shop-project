@@ -45,4 +45,13 @@ export default class CarService {
     if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
     return new Car(response);
   }
+
+  public async delete(id: string) {
+    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+
+    const response = await this._model.delete(id);
+
+    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
+    return new Car(response);
+  }
 }
