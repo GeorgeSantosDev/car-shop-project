@@ -21,5 +21,10 @@ export default class CarRoutes {
       '/:id',
       (req, res, next) => controller.findById(req, res, next),
     );
+
+    this.route.put(
+      '/:id',
+      (req, res, next) => controller.update(req, res, next),
+    );
   }
 }
