@@ -1,7 +1,7 @@
 import MotorcycleODM from '../Models/ MotorcycleODM';
 import AbstractODM from '../Models/AbstractODM';
 import { IMotorcycle } from '../Interfaces';
-import Motorcycle from '../Domains/ Motorcycle';
+import Motorcycle from '../Domains/Motorcycle';
 
 const model = new MotorcycleODM();
 
