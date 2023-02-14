@@ -2,12 +2,14 @@ import CarODM from '../Models/CarODM';
 import AbstractODM from '../Models/AbstractODM';
 import { ICar } from '../Interfaces';
 import Car from '../Domains/Car';
+import HttpException from '../utils/HttpException';
+import StatusCode from '../utils/StatusCode';
 
 const model = new CarODM();
 
 export default class CarService {
   private _model: AbstractODM<ICar>;
-  
+
   constructor(carModel: AbstractODM<ICar> = model) {
     this._model = carModel;
   }
@@ -17,5 +19,21 @@ export default class CarService {
     if (response) {
       return new Car(response);
     }
+    return null;
+  }
+
+  public async findAll() {
+    const response = await this._model.findAll();
+
+    return response.map((car) => new Car(car));
+  }
+
+  public async findById(id: string) {
+    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+
+    const response = await this._model.findById(id);
+
+    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
+    return new Car(response);
   }
 }
