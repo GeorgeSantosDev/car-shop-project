@@ -21,3 +21,5 @@ export const motorcycleOutput: Motorcycle = new Motorcycle({
   category: 'Street',
   engineCapacity: 600,
 });
+
+export const motorcyclesOutput: Motorcycle[] = [motorcycleOutput, motorcycleOutput];
