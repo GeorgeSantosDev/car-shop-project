@@ -11,5 +11,15 @@ export default class MotorcycleRoutes {
       '/',
       (req, res, next) => controller.register(req, res, next),
     );
+
+    this.route.get(
+      '/',
+      (req, res, next) => controller.findAll(req, res, next),
+    );
+
+    this.route.get(
+      '/:id',
+      (req, res, next) => controller.findById(req, res, next),
+    );
   }
 }
