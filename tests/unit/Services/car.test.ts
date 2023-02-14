@@ -75,7 +75,8 @@ describe('Test car path', function () {
         } catch (error) {
           expect((error as HttpException).message).to.be.equal('Car not found');
         }
-      });
+      },
+    );
 
     it('should throw an error message Invalid mongo id for invalid id format', async function () {
       sinon.stub(Model, 'findById').resolves();
