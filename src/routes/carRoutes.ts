@@ -26,5 +26,10 @@ export default class CarRoutes {
       '/:id',
       (req, res, next) => controller.update(req, res, next),
     );
+
+    this.route.delete(
+      '/:id',
+      (req, res, next) => controller.delete(req, res, next),
+    );
   }
 }
