@@ -2,6 +2,8 @@ import MotorcycleODM from '../Models/ MotorcycleODM';
 import AbstractODM from '../Models/AbstractODM';
 import { IMotorcycle } from '../Interfaces';
 import Motorcycle from '../Domains/Motorcycle';
+import HttpException from '../utils/HttpException';
+import StatusCode from '../utils/StatusCode';
 
 const model = new MotorcycleODM();
 
@@ -18,5 +20,20 @@ export default class MotorcycleService {
       return new Motorcycle(response);
     }
     return null;
+  }
+
+  public async findAll() {
+    const response = await this._model.findAll();
+
+    return response.map((motorcycle) => new Motorcycle(motorcycle));
+  }
+
+  public async findById(id: string) {
+    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+
+    const response = await this._model.findById(id);
+
+    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Motorcycle not found');
+    return new Motorcycle(response);
   }
 }
