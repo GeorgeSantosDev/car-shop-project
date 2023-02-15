@@ -115,8 +115,8 @@ describe('Test integration of cars path', function () {
   });
   
   describe('Test if is possible to delete a car', function () {
-    it('should return a car deleted and status 204', async function () {
-      sinon.stub(Model, 'findByIdAndDelete').resolves(carOutput);
+    it('should return { } and status 204', async function () {
+      sinon.stub(Model, 'findByIdAndDelete').resolves({});
 
       const chaiHttpResponse = await chai.request(app)
         .delete('/cars/6348513f34c397abcad040b2');
