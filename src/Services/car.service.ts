@@ -60,6 +60,6 @@ export default class CarService {
     const response = await this._model.delete(id);
 
     this.validateIfIdExist(response);
-    return new Car(response as ICar);
+    return response;
   }
 }

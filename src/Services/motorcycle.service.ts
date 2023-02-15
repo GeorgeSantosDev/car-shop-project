@@ -60,6 +60,6 @@ export default class MotorcycleService {
     const response = await this._model.delete(id);
 
     this.validateIfIdExist(response);
-    return new Motorcycle(response as IMotorcycle);
+    return response;
   }
 }

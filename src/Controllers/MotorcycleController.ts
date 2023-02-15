@@ -76,9 +76,9 @@ export default class MotorcycleController {
     try {
       const { id } = req.params;
 
-      const response = await this._service.delete(id);
+      await this._service.delete(id);
 
-      return res.status(StatusCode.DELETED).json(response);
+      return res.status(StatusCode.DELETED).json({});
     } catch (error) {
       next(error);
     }
