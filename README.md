@@ -2,7 +2,7 @@
 
 <p>
   Car Shop is a CRUD API built using NodeJS, Express, MongoDB, Mongoose and TypeScript. MSC architecture (Models, Services, 
-  Controllers) was applied in this project.The purpose of this application is to pratice POO and BDD. It was developed writting
+  Controllers) was applied in this project.The purpose of this application is to pratice POO and DDD. It was developed writting
   first service tests and then writting the routes. Tests were implemented with mocha, chai and sinon.
   
   The project was developed in a docker environment.
