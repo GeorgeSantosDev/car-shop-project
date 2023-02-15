@@ -14,6 +14,14 @@ export default class MotorcycleService {
     this._model = motorcycleModel;
   }
 
+  private validadteMongoId(id: string): void {
+    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+  }
+
+  private validateIfIdExist(response: IMotorcycle | null): void {
+    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Motorcycle not found');
+  }
+
   public async register(obj: IMotorcycle) {
     const response = await this._model.create(obj);
     if (response) {
@@ -29,29 +37,29 @@ export default class MotorcycleService {
   }
 
   public async findById(id: string) {
-    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+    this.validadteMongoId(id);
 
     const response = await this._model.findById(id);
 
-    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Motorcycle not found');
-    return new Motorcycle(response);
+    this.validateIfIdExist(response);
+    return new Motorcycle(response as IMotorcycle);
   }
 
   public async update(id: string, obj: IMotorcycle) {
-    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+    this.validadteMongoId(id);
 
     const response = await this._model.update(id, obj);
 
-    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Motorcycle not found');
-    return new Motorcycle(response);
+    this.validateIfIdExist(response);
+    return new Motorcycle(response as IMotorcycle);
   }
 
   public async delete(id: string) {
-    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+    this.validadteMongoId(id);
 
     const response = await this._model.delete(id);
 
-    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Motorcycle not found');
-    return new Motorcycle(response);
+    this.validateIfIdExist(response);
+    return new Motorcycle(response as IMotorcycle);
   }
 }

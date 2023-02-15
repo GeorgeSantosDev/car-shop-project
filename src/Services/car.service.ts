@@ -14,6 +14,14 @@ export default class CarService {
     this._model = carModel;
   }
 
+  private validadteMongoId(id: string): void {
+    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+  }
+
+  private validateIfIdExist(response: ICar | null): void {
+    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
+  }
+
   public async register(obj: ICar) {
     const response = await this._model.create(obj);
     if (response) {
@@ -29,29 +37,29 @@ export default class CarService {
   }
 
   public async findById(id: string) {
-    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+    this.validadteMongoId(id);
 
     const response = await this._model.findById(id);
 
-    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
-    return new Car(response);
+    this.validateIfIdExist(response);
+    return new Car(response as ICar);
   }
 
   public async update(id: string, obj: ICar) {
-    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+    this.validadteMongoId(id);
 
     const response = await this._model.update(id, obj);
 
-    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
-    return new Car(response);
+    this.validateIfIdExist(response);
+    return new Car(response as ICar);
   }
 
   public async delete(id: string) {
-    if (id.length !== 24) throw new HttpException(StatusCode.UNPROCESSABLE, 'Invalid mongo id');
+    this.validadteMongoId(id);
 
     const response = await this._model.delete(id);
 
-    if (!response) throw new HttpException(StatusCode.NOT_FOUND, 'Car not found');
-    return new Car(response);
+    this.validateIfIdExist(response);
+    return new Car(response as ICar);
   }
 }
