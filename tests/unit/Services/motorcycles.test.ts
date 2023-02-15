@@ -7,6 +7,9 @@ import HttpException from '../../../src/utils/HttpException';
 
 const service = new MotorcycleService();
 
+const idNotFoundMessage = 'Motorcycle not found';
+const invalidIdMessage = 'Invalid mongo id';
+
 describe('Test motorcycles path', function () {
   afterEach(function () {
     sinon.restore();
@@ -43,17 +46,17 @@ describe('Test motorcycles path', function () {
         try {
           await service.findById('6348513f34c397abcad040b2');
         } catch (error) {
-          expect((error as HttpException).message).to.be.equal('Motorcycle not found');
+          expect((error as HttpException).message).to.be.equal(idNotFoundMessage);
         }
       },
     );
 
-    it('should throw an error message Invalid mongo id for invalid id format', async function () {
+    it('should throw an  error message Invalid mongo id for invalid id format', async function () {
       sinon.stub(Model, 'findById').resolves();
       try {
         await service.findById('5');
       } catch (error) {
-        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+        expect((error as HttpException).message).to.be.equal(invalidIdMessage);
       }
     });
   });
@@ -73,7 +76,7 @@ describe('Test motorcycles path', function () {
         try {
           await service.update('6348513f34c397abcad040b2', motorcycleInput);
         } catch (error) {
-          expect((error as HttpException).message).to.be.equal('Motorcycle not found');
+          expect((error as HttpException).message).to.be.equal(idNotFoundMessage);
         }
       },
     );
@@ -83,7 +86,7 @@ describe('Test motorcycles path', function () {
       try {
         await service.update('5', motorcycleInput);
       } catch (error) {
-        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+        expect((error as HttpException).message).to.be.equal(invalidIdMessage);
       }
     });
   });
@@ -103,7 +106,7 @@ describe('Test motorcycles path', function () {
         try {
           await service.delete('6348513f34c397abcad040b2');
         } catch (error) {
-          expect((error as HttpException).message).to.be.equal('Motorcycle not found');
+          expect((error as HttpException).message).to.be.equal(idNotFoundMessage);
         }
       },
     );
@@ -113,7 +116,7 @@ describe('Test motorcycles path', function () {
       try {
         await service.delete('5');
       } catch (error) {
-        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+        expect((error as HttpException).message).to.be.equal(invalidIdMessage);
       }
     });
   });

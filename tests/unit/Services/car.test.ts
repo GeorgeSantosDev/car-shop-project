@@ -7,6 +7,9 @@ import HttpException from '../../../src/utils/HttpException';
 
 const service = new CarService();
 
+const idNotFoundMessage = 'Car not found';
+const invalidIdMessage = 'Invalid mongo id';
+
 describe('Test car path', function () {
   afterEach(function () {
     sinon.restore();
@@ -37,23 +40,23 @@ describe('Test car path', function () {
     });
 
     it(
-      'should throw an error message Car not found when id does not exit in db',
+      'should throw an error message Car  not found when id does not exit in db',
       async function () {
         sinon.stub(Model, 'findById').resolves(null);
         try {
           await service.findById('6348513f34c397abcad040b2');
         } catch (error) {
-          expect((error as HttpException).message).to.be.equal('Car not found');
+          expect((error as HttpException).message).to.be.equal(idNotFoundMessage);
         }
       },
     );
 
-    it('should throw an error message Invalid mongo id for invalid id format', async function () {
+    it('should throw an  error message Invalid mongo id for invalid id format', async function () {
       sinon.stub(Model, 'findById').resolves();
       try {
         await service.findById('5');
       } catch (error) {
-        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+        expect((error as HttpException).message).to.be.equal(invalidIdMessage);
       }
     });
   });
@@ -73,7 +76,7 @@ describe('Test car path', function () {
         try {
           await service.update('6348513f34c397abcad040b2', carInput);
         } catch (error) {
-          expect((error as HttpException).message).to.be.equal('Car not found');
+          expect((error as HttpException).message).to.be.equal(idNotFoundMessage);
         }
       },
     );
@@ -83,7 +86,7 @@ describe('Test car path', function () {
       try {
         await service.update('5', carInput);
       } catch (error) {
-        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+        expect((error as HttpException).message).to.be.equal(invalidIdMessage);
       }
     });
   });
@@ -103,7 +106,7 @@ describe('Test car path', function () {
         try {
           await service.delete('6348513f34c397abcad040b2');
         } catch (error) {
-          expect((error as HttpException).message).to.be.equal('Car not found');
+          expect((error as HttpException).message).to.be.equal(idNotFoundMessage);
         }
       },
     );
@@ -113,7 +116,7 @@ describe('Test car path', function () {
       try {
         await service.delete('5');
       } catch (error) {
-        expect((error as HttpException).message).to.be.equal('Invalid mongo id');
+        expect((error as HttpException).message).to.be.equal(invalidIdMessage);
       }
     });
   });
