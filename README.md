@@ -256,6 +256,18 @@
 
 <br />
 <br />
+
+<h2>
+  How to run tests?
+</h2>
+
+<p>
+   1. First run <code>npm install</code> to install all dependences. </br>
+   2. Run <code>npm run test:mocha</code> in your terminal to run all tests.</br>
+</p>
+
+<br />
+<br />
 <br /> 
 
 <p> Any questions or suggestions? Contact me </p>
