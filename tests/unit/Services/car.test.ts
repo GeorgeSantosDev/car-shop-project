@@ -10,7 +10,7 @@ const service = new CarService();
 const idNotFoundMessage = 'Car not found';
 const invalidIdMessage = 'Invalid mongo id';
 
-describe('Test car path', function () {
+describe('Test car path of service layer', function () {
   afterEach(function () {
     sinon.restore();
   });

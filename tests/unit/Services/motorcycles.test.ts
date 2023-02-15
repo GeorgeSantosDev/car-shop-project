@@ -10,7 +10,7 @@ const service = new MotorcycleService();
 const idNotFoundMessage = 'Motorcycle not found';
 const invalidIdMessage = 'Invalid mongo id';
 
-describe('Test motorcycles path', function () {
+describe('Test motorcycles path of service layer', function () {
   afterEach(function () {
     sinon.restore();
   });
